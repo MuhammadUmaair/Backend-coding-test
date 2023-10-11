@@ -15,6 +15,10 @@ class CreateAttendanceTable extends Migration
     {
         Schema::create('attendance', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('attendancefaults_id')->unsigned()->index();
+            $table->foreign('attendancefaults_id')->references('id')->on('attendance_faults');
+            $table->boolean('active')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

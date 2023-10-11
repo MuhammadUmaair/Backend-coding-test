@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAttendanceFaultsTable extends Migration
+class CreateShiftsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateAttendanceFaultsTable extends Migration
      */
     public function up()
     {
-        Schema::create('attendance_faults', function (Blueprint $table) {
+        Schema::create('shifts', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('schedule_id')->unsigned()->index();
+            $table->foreign('schedule_id')->references('id')->on('schedules');
+            $table->boolean('active')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateAttendanceFaultsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attendance_faults');
+        Schema::dropIfExists('shifts');
     }
 }
