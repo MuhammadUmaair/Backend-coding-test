@@ -2,16 +2,20 @@
 
 namespace App\Imports;
 
-use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
+use App\Models\Attendance;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class AttendanceImport implements ToCollection
+class AttendanceImport implements ToModel, WithHeadingRow
 {
     /**
-    * @param Collection $collection
+    * @param array $row
     */
-    public function collection(Collection $collection)
+    public function model(array $row)
     {
-        //
+        return new Attendance([
+            'attendancefaults_id' => $row['attendancefaults_id'],
+        ]);
     }
 }
+
