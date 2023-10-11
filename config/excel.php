@@ -74,6 +74,7 @@ return [
     ],
 
     'imports'            => [
+        'attendance' => \App\Imports\AttendanceImport::class,
 
         /*
         |--------------------------------------------------------------------------
