@@ -9,4 +9,9 @@ class Attendance extends Model
 {
     protected $table = 'attendance';
     use HasFactory;
+    protected $fillable = [
+        'attendancefaults_id',
+        'active',
+    ];
+
 }
