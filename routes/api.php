@@ -23,5 +23,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::controller(AttendanceController::class)->group(function () {
 
 Route::post('attendance/upload', 'uploadAttendance');
+Route::get('/employee/{id}/attendance', 'getEmployeeAttendance');
 
 });
