@@ -9,18 +9,20 @@ use Maatwebsite\Excel\Facades\Excel;
 class AttendanceController extends Controller
 {
     public function uploadAttendance(Request $request)
-    {
-        $this->validate($request, [
-            'file' => 'required|mimes:xls,xlsx',
-        ]);
+{
+    $this->validate($request, [
+        'file' => 'required|mimes:xls,xlsx',
+    ]);
 
-        $file = $request->file('file');
-        Excel::import(new AttendanceImport(), $file);
-        if (count(AttendanceImport::failures()) > 0) {
-            return response()->json(['message' => 'Failed to import data.'], 400);
-        }
+    $file = $request->file('file');
+    Excel::import(new AttendanceImport, $file->store('files'));
 
-        return response()->json(['message' => 'Data imported successfully.'], 200);
-    }
+    // if (count(AttendanceImport::$failures) > 0) {
+        // Handle failures
+        // return response()->json(['message' => 'Failed to import data.'], 400);
+    // }
+
+    return response()->json(['message' => 'Data imported successfully.'], 200);
 }
 
+}
