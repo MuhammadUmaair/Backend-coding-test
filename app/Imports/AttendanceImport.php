@@ -15,7 +15,7 @@ class AttendanceImport implements ToModel, WithHeadingRow
     {
         return new Attendance([
             'attendancefaults_id' => $row['attendancefaults_id'],
+            'active' => $row['active'],
         ]);
     }
 }
-
