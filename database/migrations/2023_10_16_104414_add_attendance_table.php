@@ -15,7 +15,7 @@ class AddAttendanceTable extends Migration
     {
         Schema::table('attendance', function (Blueprint $table) {
 
-            $table->date('check_in')->after('whichever_column')->nullable();
+            $table->date('check_in')->after('id')->nullable();
             $table->date('check_out')->after('check_in')->nullable();
         });
     }
