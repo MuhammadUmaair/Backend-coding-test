@@ -15,6 +15,12 @@
 ``` php artisan make:model Attendance ```
 
 ## Routes
+### for Create an API endpoint to upload excel attendance and store data in the database.
+http://127.0.0.1:8000/api/attendance/upload
+
+### for Create an API endpoint to return attendance information of an employee with total working hours.
+
+http://127.0.0.1:8000/api/employee
 
 ## Dependencies Or Packages
 
@@ -72,6 +78,66 @@ Use this website as  a Reference [Laravel Excel](https://docs.laravel-excel.com/
 **This Command created Personal Access Client**
 
 ``` php artisan passport:install ```
+
+**Create a service inside**
+To Create Services, we create a folder in app directory name 'Services', then we create a file 'NameService.php'.
+
+In This file make a function attendanceWithWorkingHours(), write a query with f_key relation, and get the values we need.for better performance we use select
+
+```
+public function attendanceWithWorkingHours()
+    {
+        return Employee::select('id', 'name', 'attendance_id')
+            ->with('attendance:id,check_in,check_out')
+            ->get()
+            ->map(function ($employee) {
+                $attendance = $employee->attendance;
+                $checkIn = optional($attendance)->check_in
+                    ? Carbon::parse($attendance->check_in)->format('Y-m-d H:i:s')
+                    : 'N/A';
+                $checkOut = optional($attendance)->check_out
+                    ? Carbon::parse($attendance->check_out)->format('Y-m-d H:i:s')
+                    : 'N/A';
+                $workingHours = optional($attendance)->check_in && optional($attendance)->check_out
+                    ? Carbon::parse($attendance->check_out)->diffInHours(Carbon::parse($attendance->check_in))
+                    : 'N/A';
+                return [
+                    'name' => $employee->name,
+                    'check_in' => $checkIn,
+                    'check_out' => $checkOut,
+                    'total_working_hours' => $workingHours,
+                ];
+            });
+    }
+
+```
+
+**Usage Of Relation**
+
+In our migrations , we create relation as per requirements.so in our 'Employee' model we create a function to get values by using f_key.
+
+```
+public function attendance()
+    {
+        return $this->belongsTo(Attendance::class, 'attendance_id', 'id');
+    }
+
+```
+
+**Now In AttendanceController:**
+
+we return values by using AttendanceService function.
+```
+public function index()
+    {
+        $attendanceService = new AttendanceService();
+        $attendanceInformation = $attendanceService->attendanceWithWorkingHours();
+        dd($attendanceInformation);
+
+        return view('attendance.index', ['attendanceInformation' => $attendanceInformation]);
+    }
+
+```
 
 Use this official website as  a Reference [Laravel Passport](https://laravel.com/docs/8.x/passport).
 
