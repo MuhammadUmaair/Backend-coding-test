@@ -14,10 +14,11 @@ class AttendanceController extends Controller
     {
         $attendanceService = new AttendanceService();
         $attendanceInformation = $attendanceService->attendanceWithWorkingHours();
-        dd($attendanceInformation);
+        return view('attendance', ['attendanceData' => json_encode($attendanceInformation)]);
 
-        return view('attendance.index', ['attendanceInformation' => $attendanceInformation]);
     }
+
+
 
     public function uploadAttendance(Request $request)
     {
