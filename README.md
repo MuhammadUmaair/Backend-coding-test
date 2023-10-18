@@ -8,6 +8,9 @@
 
 ``` php artisan make:controller AttendanceController ```
 
+
+``` php artisan make:controller ArrayController ```
+
 ## Models
 
 **Create Models As Per Requirements**
@@ -15,12 +18,25 @@
 ``` php artisan make:model Attendance ```
 
 ## Routes
+
+### for Array Duplicate file
+
+```
+    http://127.0.0.1:8000/get-input
+
+```
 ### for Create an API endpoint to upload excel attendance and store data in the database.
+```
 http://127.0.0.1:8000/api/attendance/upload
+
+```
 
 ### for Create an API endpoint to return attendance information of an employee with total working hours.
 
-http://127.0.0.1:8000/api/employee
+```
+http://127.0.0.1:8000/api/index
+
+```
 
 ## Dependencies Or Packages
 
@@ -155,6 +171,66 @@ Use this website as a Reference [React In Laravel](https://adevait.com/laravel/u
 
 Use this official website as a Reference [Laravel Passport](https://laravel.com/docs/8.x/passport).
 
+## For Duplicate Array Values
+
+**Controller**
+
+```
+    public function index()
+    {
+        return view('duplicateArray.getinput');
+    }
+
+    public function findDuplicates(Request $request)
+    {
+        $inputArray = explode(',', $request->input('inputArray'));
+        $duplicates = array_unique(array_diff_assoc($inputArray, array_unique($inputArray)));
+
+        return view('duplicateArray.output', ['duplicates' => $duplicates]);
+    }
+
+```
+
+**we create two file one for input and one for output**
+
+**InputFile**
+
+```
+    <form method="POST" action="/find-duplicates">
+        @csrf
+        <div class="form-group">
+            <label for="inputArray">Enter comma-separated elements:</label>
+            <input type="text" name="inputArray" class="form-control" id="inputArray">
+        </div>
+        <button type="submit" class="btn btn-primary">Find Duplicates</button>
+    </form>
+
+```
+
+**OutPutFile**
+
+```
+    <div class="container">
+        <h1>Duplicate Array Elements</h1>
+
+
+        @if (count($duplicates) > 0)
+            <div>
+                <h6><b>Output:</b></h6>
+                <p>
+                    @foreach ($duplicates as $duplicate)
+                        {{ $duplicate }}@if (!$loop->last), @endif
+                    @endforeach
+                </p>
+                <p><b>Explanation:</b> {{ implode(', ', $duplicates) }} occur more than once in the given array.</p>
+            </div>
+        @else
+            <p>No duplicates found.</p>
+        @endif
+        <a href="{{ route('arrayinput') }}">Back</a>
+    </div>
+
+```
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
