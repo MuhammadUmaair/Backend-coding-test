@@ -132,14 +132,21 @@ public function index()
     {
         $attendanceService = new AttendanceService();
         $attendanceInformation = $attendanceService->attendanceWithWorkingHours();
-        dd($attendanceInformation);
+        return view('attendance', ['attendanceData' => json_encode($attendanceInformation)]);
 
-        return view('attendance.index', ['attendanceInformation' => $attendanceInformation]);
     }
 
 ```
 
-Use this official website as  a Reference [Laravel Passport](https://laravel.com/docs/8.x/passport).
+## For React:
+
+Use this website as a Reference [React In Laravel](https://adevait.com/laravel/using-laravel-with-react-js).
+use this command for mix : 
+```
+    npm install --save-dev laravel-mix-react
+    
+```
+Use this official website as a Reference [Laravel Passport](https://laravel.com/docs/8.x/passport).
 
 ## License
 
