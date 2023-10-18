@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArrayController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+
+Route::controller(ArrayController::class)->group(function () {
+    Route::get('/get-input',  'index')->name('arrayinput');
+    Route::post('/find-duplicates', 'findDuplicates')->name('findDuplicates');
 });
