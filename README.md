@@ -207,6 +207,10 @@ Use this official website as a Reference [Laravel Passport](https://laravel.com/
 
 ```
 
+![image](https://github.com/MuhammadUmaair/Backend-coding-test/assets/104490047/d50a8b79-e777-4f98-b978-85b9188052fc)
+
+
+
 **OutPutFile**
 
 ```
@@ -231,6 +235,9 @@ Use this official website as a Reference [Laravel Passport](https://laravel.com/
     </div>
 
 ```
+
+![image](https://github.com/MuhammadUmaair/Backend-coding-test/assets/104490047/337e56e4-663f-44e7-aeae-96287a4149f0)
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
