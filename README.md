@@ -141,11 +141,18 @@ public function index()
 ## For React:
 
 Use this website as a Reference [React In Laravel](https://adevait.com/laravel/using-laravel-with-react-js).
-use this command for mix : 
+
+**use this command for mix:** 
+
 ```
     npm install --save-dev laravel-mix-react
     
 ```
+
+**Here is our output:**
+
+![image](https://github.com/MuhammadUmaair/Backend-coding-test/assets/104490047/79406af4-61b1-47d6-ad36-c721857ae701)
+
 Use this official website as a Reference [Laravel Passport](https://laravel.com/docs/8.x/passport).
 
 ## License
