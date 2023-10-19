@@ -11,6 +11,9 @@
 
 ``` php artisan make:controller ArrayController ```
 
+
+``` php artisan make:controller GroupByOwnerController ```
+
 ## Models
 
 **Create Models As Per Requirements**
@@ -23,6 +26,12 @@
 
 ```
     http://127.0.0.1:8000/get-input
+
+```
+### for groupByOwnersService
+
+```
+    http://127.0.0.1:8000/process-data
 
 ```
 ### for Create an API endpoint to upload excel attendance and store data in the database.
@@ -237,6 +246,52 @@ Use this official website as a Reference [Laravel Passport](https://laravel.com/
 ```
 
 ![image](https://github.com/MuhammadUmaair/Backend-coding-test/assets/104490047/337e56e4-663f-44e7-aeae-96287a4149f0)
+
+## For GroupByOwner
+
+**Controller**
+
+```
+    public function processData(Request $request)
+    {
+        $data = ["insurance.txt" => "Company A", "letter.docx" => "Company A", "Contract.docx" => "Company B"];
+        $groupByOwnersService = new GroupByOwnersService();
+        $groupedData = $groupByOwnersService->groupByOwners($data);
+        return view('groupByOwnerService.view', ['groupedData' => $groupedData]);
+    }
+
+```
+
+**Service**
+
+```
+    public function groupByOwners($files)
+    {
+        $groupedFiles = [];
+
+        foreach ($files as $file => $owner) {
+            if (!array_key_exists($owner, $groupedFiles)) {
+                $groupedFiles[$owner] = [];
+            }
+            $groupedFiles[$owner][] = $file;
+        }
+
+        return $groupedFiles;
+    }
+
+```
+
+**View**
+
+```
+    @foreach ($groupedData as $owner => $files)
+    <h3>{{ $owner }}</h3>
+        @foreach ($files as $file)
+        <p>{{ $file }}</p>
+        @endforeach
+    @endforeach
+
+```
 
 ## License
 
