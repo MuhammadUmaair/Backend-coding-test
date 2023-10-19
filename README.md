@@ -292,6 +292,8 @@ Use this official website as a Reference [Laravel Passport](https://laravel.com/
     @endforeach
 
 ```
+![image](https://github.com/MuhammadUmaair/Backend-coding-test/assets/104490047/01a35c69-f0ef-4555-a64f-80afa1d16103)
+
 
 ## License
 
