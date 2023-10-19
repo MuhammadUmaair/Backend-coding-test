@@ -247,6 +247,15 @@ Use this official website as a Reference [Laravel Passport](https://laravel.com/
 
 ![image](https://github.com/MuhammadUmaair/Backend-coding-test/assets/104490047/337e56e4-663f-44e7-aeae-96287a4149f0)
 
+
+
+
+## For Company Organization Context
+
+![image](https://github.com/MuhammadUmaair/Backend-coding-test/assets/104490047/972476b4-134e-4b32-8fdf-04ef390a4a6d)
+
+
+
 ## For GroupByOwner
 
 **Controller**
