@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArrayController;
+use App\Http\Controllers\GroupByOwnerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,4 +23,7 @@ Route::get('/', function () {
 Route::controller(ArrayController::class)->group(function () {
     Route::get('/get-input',  'index')->name('arrayinput');
     Route::post('/find-duplicates', 'findDuplicates')->name('findDuplicates');
+});
+Route::controller(GroupByOwnerController::class)->group(function () {
+    Route::get('/process-data', 'processData')->name('processData');
 });
